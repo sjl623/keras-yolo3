@@ -11,12 +11,14 @@ def detect_img(yolo):
         #img = input('Input image filename:')
           try:
               image = Image.open("image/"+file)
+              image=image.convert("RGB")
           except:
               print('Open Error! Try again!')
               continue
           else:
               r_image = yolo.detect_image(image)
               r_image.save("output/"+file)
+        break
     yolo.close_session()
 
 FLAGS = None
