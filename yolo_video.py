@@ -2,18 +2,21 @@ import sys
 import argparse
 from yolo import YOLO, detect_video
 from PIL import Image
+import os
 
 def detect_img(yolo):
     while True:
-        img = input('Input image filename:')
-        try:
-            image = Image.open(img)
-        except:
-            print('Open Error! Try again!')
-            continue
-        else:
-            r_image = yolo.detect_image(image)
-            r_image.show()
+        files=os.listdir("image")
+        for file in files:
+        #img = input('Input image filename:')
+          try:
+              image = Image.open("image/"+file)
+          except:
+              print('Open Error! Try again!')
+              continue
+          else:
+              r_image = yolo.detect_image(image)
+              r_image.save("output/"+file)
     yolo.close_session()
 
 FLAGS = None
