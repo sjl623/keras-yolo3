@@ -16,7 +16,10 @@ def detect_img(yolo):
               print('Open Error! Try again!')
               continue
           else:
-              r_image = yolo.detect_image(image)
+              boxes,r_image = yolo.detect_image(image)
+              with open("result/"+file.split(".")[0]+".txt","w+") as f:
+                 f.writelines(str(boxes))
+              
               r_image.save("output/"+file)
         break
     yolo.close_session()
